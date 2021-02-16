@@ -31,7 +31,7 @@
 bl_info = {
     "name": "Multi Auto Save",
     "author": "sambler, 1C0D",
-    "version": (1, 1, 0),
+    "version": (1, 1, 1),
     "blender": (2, 90, 0),
     "location": "blender",
     "description": "Automatically save multiple copies of a blend file",
@@ -69,7 +69,7 @@ class AutoBlendSavePreferences(bpy.types.AddonPreferences):
 
     save_after_open : bpy.props.BoolProperty(name='Save on open',
                     description='Save a copy of file after opening it',
-                    default=True)
+                    default=False)
     save_before_close : bpy.props.BoolProperty(name='Save before close',
                     description='Save the current file before opening another file',
                     default=True)
