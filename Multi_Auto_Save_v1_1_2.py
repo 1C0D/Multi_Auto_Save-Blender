@@ -31,7 +31,7 @@
 bl_info = {
     "name": "Multi Auto Save",
     "author": "sambler, 1C0D",
-    "version": (1, 1, 1),
+    "version": (1, 1, 2),
     "blender": (2, 90, 0),
     "location": "blender",
     "description": "Automatically save multiple copies of a blend file",
@@ -78,7 +78,7 @@ class AutoBlendSavePreferences(bpy.types.AddonPreferences):
                     default=True)
     save_interval : bpy.props.IntProperty(name='Time interval',
                     description='Number of minutes between each save',
-                    default=3, min=1, max=120, soft_max=30)
+                    default=2, min=1, max=120, soft_max=30)
     max_save_files : bpy.props.IntProperty(name='Max save files',
                     description='Maximum number of copies to save, 0 means unlimited',
                     default=10, min=0, max=100)
@@ -171,13 +171,15 @@ def save_pre_close(scn):
 @persistent
 def timed_save(scn):
     global last_saved
-    if bpy.data.is_dirty and prefs().save_on_interval \
-            and time_since_save() >= prefs().save_interval:
-        save_file()
-    elif not bpy.data.is_dirty and prefs().save_on_interval \
-            and time_since_save() >= prefs().save_interval: #if time elapsed but no change reset time
-        last_saved = dt.datetime.now()
 
+    if not prefs().save_on_interval:
+        return
+    if time_since_save() < prefs().save_interval:
+        return        
+    if bpy.data.is_dirty: #if time elapsed but no change reset time
+        save_file()
+    else: #if no change reset time
+        last_saved = dt.datetime.now()
 
 def register():
 
