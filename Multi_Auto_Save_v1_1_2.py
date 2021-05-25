@@ -31,7 +31,7 @@
 bl_info = {
     "name": "Multi Auto Save",
     "author": "sambler, 1C0D",
-    "version": (1, 1, 2),
+    "version": (1, 1, 3),
     "blender": (2, 90, 0),
     "location": "blender",
     "description": "Automatically save multiple copies of a blend file",
