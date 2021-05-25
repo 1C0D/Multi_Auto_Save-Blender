@@ -126,6 +126,13 @@ def save_file():
     dir=bpy.context.preferences.filepaths.temporary_directory
     save_dir=bpy.path.abspath(dir) if dir else tempfile.gettempdir()
     
+    try:
+        if not os.path.isdir(save_dir):
+            os.mkdir(save_dir)
+    except:
+        print("Error creating auto save directory.")
+        return
+    
     basename = bpy.data.filepath
     
     if basename == '':
