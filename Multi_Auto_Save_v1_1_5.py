@@ -30,15 +30,18 @@
 
 import tempfile
 import os
+import time
 import datetime as dt
 from bpy.app.handlers import persistent
 from bpy_extras.io_utils import ImportHelper
 from bpy.types import Operator
 import bpy
+
+
 bl_info = {
     "name": "Multi Auto Save",
     "author": "sambler, 1C0D",
-    "version": (1, 1, 4),
+    "version": (1, 1, 5),
     "blender": (2, 90, 0),
     "location": "blender",
     "description": "Automatically save multiple copies of a blend file",
@@ -173,6 +176,7 @@ def save_file():
     try:
         bpy.ops.wm.save_as_mainfile(filepath=backup_file, copy=True,
                                     compress=p.compress_backups)
+        time.sleep(0.05)
     except:
         print('Error auto saving file.')
 
