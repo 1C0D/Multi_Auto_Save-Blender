@@ -158,7 +158,7 @@ def save_file():
             # sorted puts the oldest prefix at the start of the list
             # this should be quicker than getting system timestamps for each file
             otherfiles = sorted([name for name in os.listdir(
-                save_dir) if name.endswith(basename) and name.endswith('.blend')])
+                save_dir) if name.endswith('.blend') and name.endswith(basename)])
             if len(otherfiles) >= p.max_save_files:
                 while len(otherfiles) >= p.max_save_files:
                     old_file = os.path.join(save_dir, otherfiles[0])
